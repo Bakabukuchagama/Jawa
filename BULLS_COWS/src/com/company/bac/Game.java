@@ -40,14 +40,7 @@ public class Game {
         System.out.println("cows = " +cows + " bulls = " + bulls + "\n");
     }
     public boolean congratulation(){
-        int congratulation = 0;
-        for (int i = 0; i < questgame.length; i++) {
-            if(questgame[i]==user[i]) congratulation++;
-        }
-        if(congratulation==user.length) {
-            return true;
-        }
-        else return false;
+        return bulls == user.length;
     }
 
 

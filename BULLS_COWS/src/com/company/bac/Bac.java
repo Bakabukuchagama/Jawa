@@ -8,7 +8,7 @@ public class Bac {
     public Bac (int size) {
         genArray=genArray(size);
     }
-    public static int[] genArray(int size)
+    protected int[] genArray(int size)
     {
         int[] arr = new int[size];
         int tunic = 0;
