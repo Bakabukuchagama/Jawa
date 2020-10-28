@@ -7,6 +7,16 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public void viewQuestion() {
+
+    }
+
+    @Override
+    public void viewOneQuestion() {
+
+    }
+
+    @Override
     public void removeQuestion() {
 
     }
