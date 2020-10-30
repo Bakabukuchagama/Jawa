@@ -1,0 +1,10 @@
+<Quesions>
+    <Quest id="1">
+        <question>2+2</question>
+        <author>Лёха</author>
+        <difficulty>EASY</difficulty>
+        <type>ONE_QUESTION</type>
+        <answer>4</answer>
+        <right></right>
+    </Quest>
+</Quesions>
