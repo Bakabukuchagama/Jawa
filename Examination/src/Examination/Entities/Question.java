@@ -1,9 +1,7 @@
 package Examination.Entities;
 
-import Examination.Type.DifficultyQuestion;
-import Examination.Type.TypeQuestion;
-
-import java.util.Arrays;
+import Examination.Enumerations.DifficultyQuestion;
+import Examination.Enumerations.TypeQuestion;
 
 public class Question {
     private String question;
@@ -65,8 +63,8 @@ public class Question {
         isRight = right;
     }
 
-    public void getAnswer() {
-        this.answer = answer;
+    public String getAnswer() {
+        return answer;
     }
 
     public void setAnswer(String answer) {

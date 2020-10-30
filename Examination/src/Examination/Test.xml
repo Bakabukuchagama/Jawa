@@ -1,10 +1,1 @@
-<Quesions>
-    <Quest id="1">
-        <question>2+2</question>
-        <author>Лёха</author>
-        <difficulty>EASY</difficulty>
-        <type>ONE_QUESTION</type>
-        <answer>4</answer>
-        <right></right>
-    </Quest>
-</Quesions>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Questions><Quest id="1"><question>2+2</question><author>Лёха</author><difficulty>EASY</difficulty><type>ONE_QUESTION</type><answer>4</answer></Quest><Quest id="2"><question>Что такое земля?</question><author>Макс</author><difficulty>MEDIUM</difficulty><type>ONE_QUESTION</type><answer>Планета</answer></Quest></Questions>

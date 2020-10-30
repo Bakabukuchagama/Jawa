@@ -1,4 +1,4 @@
-package Examination.Type;
+package Examination.Enumerations;
 
 public enum DifficultyQuestion {
     EASY("EASY"),
@@ -15,4 +15,14 @@ public enum DifficultyQuestion {
     {
         return value;
     }
+
+    public static DifficultyQuestion getByName(String name) {
+
+        try {
+            return valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return EASY;
+        }
+    }
+
 }

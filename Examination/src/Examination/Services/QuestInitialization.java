@@ -1,8 +1,8 @@
-package Examination;
+package Examination.Services;
 
 import Examination.Entities.Question;
-import Examination.Type.DifficultyQuestion;
-import Examination.Type.TypeQuestion;
+import Examination.Enumerations.DifficultyQuestion;
+import Examination.Enumerations.TypeQuestion;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class QuestInitialization {
     DocumentBuilder documentBuilder= DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    Document Document=documentBuilder.parse("src/Examination/Test.xml");
+    Document Document=documentBuilder.parse("Examination/src/Examination/Test.xml");
      Node Root = Document.getDocumentElement();
 
     public QuestInitialization() throws IOException, SAXException, ParserConfigurationException {

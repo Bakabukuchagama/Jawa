@@ -1,4 +1,4 @@
-package Examination.Type;
+package Examination.Enumerations;
 
 public enum TypeQuestion {
     ONE_QUESTION("ONE_QUESTION"),
@@ -12,5 +12,14 @@ public enum TypeQuestion {
     public String getValue()
     {
         return value;
+    }
+
+    public static TypeQuestion getByName(String name) {
+
+        try {
+            return valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return OPEN_QUESTION;
+        }
     }
 }
