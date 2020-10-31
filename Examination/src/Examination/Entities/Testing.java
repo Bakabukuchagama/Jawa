@@ -7,7 +7,7 @@ public class Testing {
         this.test = test;
     }
 
-    public void testStart(){
-        test.start();
-    }
+//    public void testStart(){
+//        test.start();
+//    }
 }

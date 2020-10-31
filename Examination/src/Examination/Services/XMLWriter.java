@@ -1,6 +1,7 @@
 package Examination.Services;
 
 import Examination.Entities.Question;
+import Examination.Main;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,20 +18,19 @@ import java.io.File;
 import java.util.List;
 
 public class XMLWriter {
-    public  static final String Filexml ="Examination/src/Examination/Test.xml";
+    public static String Filexml ="";
     public static void File(List<Question> questionList) throws TransformerException, ParserConfigurationException
     {
 
         DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
         Document document = documentBuilder.newDocument();
+        Filexml = Main.getFile();
 
         Element root = document.createElement("Questions");
         document.appendChild(root);
-        for (int i = 0; i < questionList.size(); i++)
-        {
-            questionList.get(i);
-            Question quest = questionList.get(i);
+        for (Question quest : questionList) {
+            //         questionList.get(i);
             Element employee = document.createElement("Quest");
 
             root.appendChild(employee);

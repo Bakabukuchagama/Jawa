@@ -6,10 +6,10 @@ public class Test {
     public Test(Question[] questions) {
         this.questions = questions;
     }
-    public void start(){
-        for (Question question:
-             questions) {
-            question.isRight();
-        }
-    }
+//    public void start(){
+//        for (Question question:
+//             questions) {
+//            question.isRight();
+//        }
+//    }
 }

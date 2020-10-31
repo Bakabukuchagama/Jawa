@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class QuestionServiceImpl implements QuestionService {
 Scanner scanner = new Scanner(System.in);
 
-    public QuestionServiceImpl()  throws Exception {
+    public QuestionServiceImpl() {
     }
 
     public static String getInput(String message, Scanner scanner)
@@ -62,9 +62,9 @@ Scanner scanner = new Scanner(System.in);
     @Override
     public void viewQuestion(List<Question> questionList) {
 //        questionList.forEach(System.out::println);
-        for (int i = 0; i < questionList.size(); i++) {
+        for (Question question : questionList) {
             System.out.println();
-            System.out.println("ID: " + questionList.get(i).getId() + " Вопрос: " + questionList.get(i).getQuestion());
+            System.out.println("ID: " + question.getId() + " Вопрос: " + question.getQuestion());
         }
 
     }
@@ -72,9 +72,9 @@ Scanner scanner = new Scanner(System.in);
     @Override
     public void viewOneQuestion(List<Question> questionList, String command) {
 
-        for (int i = 0; i < questionList.size(); i++) {
-            if (extractParameter(command, 5) == questionList.get(i).getId()) {
-                System.out.println(questionList.get(i));
+        for (Question question : questionList) {
+            if (extractParameter(command, 5) == question.getId()) {
+                System.out.println(question);
                 break;
             }
         }
@@ -94,7 +94,20 @@ Scanner scanner = new Scanner(System.in);
     }
 
     @Override
-    public void redactionQuestion(List<Question> questionList, String command) {
+    public void redactionQuestion(List<Question> questionList, String command) throws TransformerException, ParserConfigurationException {
+        for (Question question : questionList) {
+            if (extractParameter(command, 5) == question.getId()) {
+                Question editQuest = question;
 
+                String input = getInput("Введите новый вопрос: ", scanner);
+                editQuest.setQuestion(input.equals("") ? editQuest.getQuestion() : input);
+
+                input = getInput("Введите новый ответ: ", scanner);
+                editQuest.setAnswer(input.equals("") ? editQuest.getAnswer() : input);
+
+                break;
+            }
+        }
+        XMLWriter.File(questionList);
     }
 }

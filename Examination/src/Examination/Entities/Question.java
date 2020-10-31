@@ -9,7 +9,7 @@ public class Question {
     private DifficultyQuestion difficulty;
     private TypeQuestion type;
     private Integer id;
-    private boolean isRight;
+ //   private boolean isRight;
     private String answer;
 
     public Question() {
@@ -59,9 +59,9 @@ public class Question {
         this.type = type;
     }
 
-    public void setRight(boolean right) {
-        isRight = right;
-    }
+//    public void setRight(boolean right) {
+//        isRight = right;
+//    }
 
     public String getAnswer() {
         return answer;
@@ -81,9 +81,9 @@ public class Question {
         this.answer = answer;
         this.id = id;
     }
-    public boolean isRight(){
-        return true;
-    }
+//    public boolean isRight(){
+//        return true;
+//    }
 
     @Override
     public String toString() {
@@ -93,7 +93,7 @@ public class Question {
                 ", author='" + author + '\'' +
                 ", difficulty=" + difficulty +
                 ", type=" + type +
-                ", isRight=" + isRight +
+//                ", isRight=" + isRight +
                 ", answer=" + answer +
                 '}';
     }

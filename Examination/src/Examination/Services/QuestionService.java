@@ -16,5 +16,5 @@ public interface QuestionService {
 
     void removeQuestion(List<Question> questionList, String command) throws TransformerException, ParserConfigurationException;
 
-    void redactionQuestion(List<Question> questionList, String command);
+    void redactionQuestion(List<Question> questionList, String command) throws TransformerException, ParserConfigurationException;
 }
