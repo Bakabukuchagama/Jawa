@@ -2,9 +2,9 @@ package Examination.Services;
 
 public interface UserService {
 
-    void registration(String name, String login, String password);
+    void registration();
 
-    Boolean authorization(String login, String password);
+    void authorization();
 
     void logout();
 

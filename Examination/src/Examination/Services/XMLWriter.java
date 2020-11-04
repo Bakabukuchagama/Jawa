@@ -2,6 +2,7 @@ package Examination.Services;
 
 import Examination.Entities.Question;
 import Examination.Main;
+import Examination.RealizeFunctionalle;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,7 +26,7 @@ public class XMLWriter {
         DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
         Document document = documentBuilder.newDocument();
-        Filexml = Main.getFile();
+        Filexml = RealizeFunctionalle.getFile();
 
         Element root = document.createElement("Questions");
         document.appendChild(root);

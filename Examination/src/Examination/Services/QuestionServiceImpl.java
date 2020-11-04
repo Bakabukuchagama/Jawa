@@ -4,6 +4,7 @@ import Examination.Entities.Question;
 import Examination.Enumerations.DifficultyQuestion;
 import Examination.Enumerations.TypeQuestion;
 
+import javax.inject.Singleton;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 
 public class QuestionServiceImpl implements QuestionService {
 Scanner scanner = new Scanner(System.in);
+private static QuestionServiceImpl instance;
 
     public QuestionServiceImpl() {
     }
@@ -32,6 +34,12 @@ Scanner scanner = new Scanner(System.in);
         return Integer.parseInt(parameter.toString());
     }
 
+    public static QuestionServiceImpl getInstance(){
+        if (instance == null) {
+            instance = new QuestionServiceImpl();
+        }
+        return instance;
+    }
 
 
     @Override
