@@ -1,6 +1,6 @@
 package Examination.Services;
 
-import Examination.DatabaseWorker;
+import Examination.DatabaseWrappers.DatabaseWorkerUsers;
 import Examination.People.User;
 
 import java.util.Scanner;
@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
         System.out.println("name");
         name = scanner.nextLine();
         User user = new User(login, password, name);
-        new DatabaseWorker().Registration(user);
+        new DatabaseWorkerUsers().Registration(user);
     }
 
     @Override
     public void authorization() {
-        new DatabaseWorker().authorization();
+        new DatabaseWorkerUsers().authorization();
     }
 
     @Override

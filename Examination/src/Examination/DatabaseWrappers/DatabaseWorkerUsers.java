@@ -1,4 +1,4 @@
-package Examination;
+package Examination.DatabaseWrappers;
 
 import Examination.People.User;
 import org.apache.commons.lang3.ObjectUtils;
@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.sql.*;
 import java.util.Scanner;
 
-public class DatabaseWorker {
+public class DatabaseWorkerUsers {
     private Connection connection = null;
     private PreparedStatement statement = null;
     private ResultSet result = null;
@@ -18,7 +18,7 @@ public class DatabaseWorker {
         return scan;
     }
 
-    public DatabaseWorker(){
+    public DatabaseWorkerUsers(){
         try {
             DriverManager.registerDriver(new org.h2.Driver());
         } catch (SQLException throwables) {
