@@ -1,12 +1,12 @@
 package Examination.Enumerations;
 
-public enum DifficultyQuestion {
+public enum QuestionDifficulty {
     EASY("EASY"),
     MEDIUM("MEDIUM"),
     HARD("HARD");
     String value;
 
-    DifficultyQuestion(String value)
+    QuestionDifficulty(String value)
     {
         this.value = value;
     }
@@ -16,7 +16,7 @@ public enum DifficultyQuestion {
         return value;
     }
 
-    public static DifficultyQuestion getByName(String name) {
+    public static QuestionDifficulty getByName(String name) {
 
         try {
             return valueOf(name.toUpperCase());

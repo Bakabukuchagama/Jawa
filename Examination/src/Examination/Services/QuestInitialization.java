@@ -1,8 +1,8 @@
 package Examination.Services;
 
 import Examination.Entities.Question;
-import Examination.Enumerations.DifficultyQuestion;
-import Examination.Enumerations.TypeQuestion;
+import Examination.Enumerations.QuestionDifficulty;
+import Examination.Enumerations.QuestionType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestInitialization {
@@ -53,15 +54,17 @@ public class QuestInitialization {
                         }
                         if (QuestProp.getNodeName().equals("difficulty"))
                         {
-                            quest.setDifficulty(DifficultyQuestion.valueOf(QuestProp.getChildNodes().item(0).getTextContent()));
+                            quest.setDifficulty(QuestionDifficulty.valueOf(QuestProp.getChildNodes().item(0).getTextContent()));
                         }
                         if (QuestProp.getNodeName().equals("type"))
                         {
-                            quest.setType(TypeQuestion.valueOf(QuestProp.getChildNodes().item(0).getTextContent()));
+                            quest.setType(QuestionType.valueOf(QuestProp.getChildNodes().item(0).getTextContent()));
                         }
                         if (QuestProp.getNodeName().equals("answer"))
                         {
-                            quest.setAnswer(QuestProp.getChildNodes().item(0).getTextContent());
+                            List<String> answ = new ArrayList<>();
+                            answ.add(QuestProp.getChildNodes().item(0).getTextContent());
+                            quest.setAnswer(answ);
                         }
 
                     }

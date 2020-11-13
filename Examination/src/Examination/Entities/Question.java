@@ -1,16 +1,18 @@
 package Examination.Entities;
 
-import Examination.Enumerations.DifficultyQuestion;
-import Examination.Enumerations.TypeQuestion;
+import Examination.Enumerations.QuestionDifficulty;
+import Examination.Enumerations.QuestionType;
+
+import java.util.List;
 
 public class Question {
     private String question;
     private String author;
-    private DifficultyQuestion difficulty;
-    private TypeQuestion type;
+    private QuestionDifficulty difficulty;
+    private QuestionType type;
     private Integer id;
  //   private boolean isRight;
-    private String answer;
+    private List<String> answer;
 
     public Question() {
 
@@ -43,19 +45,19 @@ public class Question {
         this.author = author;
     }
 
-    public DifficultyQuestion getDifficulty() {
+    public QuestionDifficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(DifficultyQuestion difficulty) {
+    public void setDifficulty(QuestionDifficulty difficulty) {
         this.difficulty = difficulty;
     }
 
-    public TypeQuestion getType() {
+    public QuestionType getType() {
         return type;
     }
 
-    public void setType(TypeQuestion type) {
+    public void setType(QuestionType type) {
         this.type = type;
     }
 
@@ -63,17 +65,17 @@ public class Question {
 //        isRight = right;
 //    }
 
-    public String getAnswer() {
+    public List<String> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(List<String> answer) {
         this.answer = answer;
     }
 
 
 
-    public Question(String question, String author, DifficultyQuestion difficulty, TypeQuestion type, String answer) {
+    public Question(String question, String author, QuestionDifficulty difficulty, QuestionType type, List<String> answer) {
         this.question = question;
         this.author = author;
         this.difficulty = difficulty;

@@ -1,12 +1,11 @@
 package Examination.DatabaseWrappers;
 import Examination.Entities.Question;
-import Examination.Enumerations.DifficultyQuestion;
-import Examination.Enumerations.TypeQuestion;
-import Examination.People.User;
-import org.apache.commons.lang3.ObjectUtils;
+import Examination.Enumerations.QuestionDifficulty;
+import Examination.Enumerations.QuestionType;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 public class DatabaseWorkerQuestions {
@@ -61,7 +60,13 @@ public class DatabaseWorkerQuestions {
             statement.setString(2, question.getAuthor());
             statement.setString(3, question.getDifficulty().getValue());
             statement.setString(4, question.getType().getValue());
-            statement.setString(5, question.getAnswer());
+            List<String> answer = question.getAnswer();
+            String listString = "";
+            for (String s : answer)
+            {
+                listString += s + "; ";
+            }
+            statement.setString(5, listString);
 
             int result = statement.executeUpdate();
         } catch (SQLException e) {
@@ -102,22 +107,31 @@ public class DatabaseWorkerQuestions {
     public Question getQuestion(String id) {
         Question quest= new Question();
         try {
-            String typeQuestion, author, difficulty, answer, question;
-            TypeQuestion typeQuestion1;
-            DifficultyQuestion difficultyQuestion1;
+            String typeQuestion, author, difficulty, question;
+            List<String> answer = new ArrayList<>();
+            QuestionType questionType1;
+            QuestionDifficulty questionDifficulty1;
             connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-            statement = connection.prepareStatement("select * from QUESTIONS where QUESTION = ?");
+            statement = connection.prepareStatement("select * from QUESTIONS where ID = ?");
             statement.setString(1, id);
             result = statement.executeQuery();
             while (result.next()) {
                 question = result.getString("QUESTION");
                 typeQuestion = result.getString("TYPE_QUESTION");
-                typeQuestion1 = TypeQuestion.getByName(typeQuestion);
+                questionType1 = QuestionType.getByName(typeQuestion);
                 author = result.getString("AUTHOR");
                 difficulty = result.getString("DIFFICULTY");
-                difficultyQuestion1 = DifficultyQuestion.getByName(difficulty);
-                answer = result.getString("ANSWER");
-                quest = new Question(question, author, difficultyQuestion1, typeQuestion1, answer);
+                questionDifficulty1 = QuestionDifficulty.getByName(difficulty);
+                if (result.getString("TYPE_QUESTION").equals("MANY_QUESTION"))
+                {
+                    String strAnswer = result.getString("ANSWER");
+                    String str[] = strAnswer.split("; ");
+                    answer = Arrays.asList(str);
+                }
+                else {
+                    answer.add(result.getString("ANSWER"));
+                }
+                quest = new Question(question, author, questionDifficulty1, questionType1, answer);
 
             }
         } catch (SQLException e) {

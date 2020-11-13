@@ -1,12 +1,12 @@
 package Examination.Services;
 
 import Examination.Entities.Question;
-import Examination.Enumerations.DifficultyQuestion;
-import Examination.Enumerations.TypeQuestion;
+import Examination.Enumerations.QuestionDifficulty;
+import Examination.Enumerations.QuestionType;
 
-import javax.inject.Singleton;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,16 +45,23 @@ private static QuestionServiceImpl instance;
     @Override
     public void addQuestion(List<Question> questionList) throws TransformerException, ParserConfigurationException {
         Question newQuest = new Question();
+        List<String> answer = new ArrayList<>();
         System.out.println("Введите вопрос: ");
         newQuest.setQuestion(scanner.nextLine());
         System.out.println("Введите автора: ");
         newQuest.setAuthor(scanner.nextLine());
         System.out.println("Введите сложность (EASY, MEDIUM, HARD): ");
-        newQuest.setDifficulty(DifficultyQuestion.getByName(scanner.nextLine()));
+        newQuest.setDifficulty(QuestionDifficulty.getByName(scanner.nextLine()));
         System.out.println("Введите тип вопроса (ONE_QUESTION, MANY_QUESTION, OPEN_QUESTION): ");
-        newQuest.setType(TypeQuestion.getByName(scanner.nextLine()));
-        System.out.println("Введите ответ на воспрос: ");
-        newQuest.setAnswer(scanner.nextLine());
+        newQuest.setType(QuestionType.getByName(scanner.nextLine()));
+        if (newQuest.getType().equals("MANY_QUESTION")){
+            System.out.println("Введите количество ответов и следом сами ответы: ");
+            for (int i = 0; i < scanner.nextInt(); i++) {
+                answer.add(scanner.nextLine());
+            }
+
+        }
+
 
         if (questionList.size()<1){
             newQuest.setId(1);
@@ -106,12 +113,23 @@ private static QuestionServiceImpl instance;
         for (Question question : questionList) {
             if (extractParameter(command, 5) == question.getId()) {
                 Question editQuest = question;
+                List<String> answer = new ArrayList<>();
 
                 String input = getInput("Введите новый вопрос: ", scanner);
                 editQuest.setQuestion(input.equals("") ? editQuest.getQuestion() : input);
+                if(editQuest.getType().equals("MANY_QUESTION")){
+                    System.out.println("Введите новое количество ответов и следом сами ответы: ");
+                        for (int i = 0; i < scanner.nextInt(); i++) {
+                        answer.add(scanner.nextLine());
+                        }
+                    editQuest.setAnswer(answer);
+                }
+                else {
+                    System.out.println("Введите новый ответ: ");
+                    answer.add(scanner.nextLine());
+                    editQuest.setAnswer(input.equals("") ? editQuest.getAnswer() : answer);
+                }
 
-                input = getInput("Введите новый ответ: ", scanner);
-                editQuest.setAnswer(input.equals("") ? editQuest.getAnswer() : input);
 
                 break;
             }

@@ -1,12 +1,12 @@
 package Examination.Enumerations;
 
-public enum TypeQuestion {
+public enum QuestionType {
     ONE_QUESTION("ONE_QUESTION"),
     MANY_QUESTION("MANY_QUESTION"),
     OPEN_QUESTION("OPEN_QUESTION");
     String value;
 
-    TypeQuestion(String value) {
+    QuestionType(String value) {
         this.value = value;
     }
     public String getValue()
@@ -14,7 +14,7 @@ public enum TypeQuestion {
         return value;
     }
 
-    public static TypeQuestion getByName(String name) {
+    public static QuestionType getByName(String name) {
 
         try {
             return valueOf(name.toUpperCase());
