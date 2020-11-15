@@ -1,6 +1,6 @@
-package Examination.Servlets;
+package Examination.servlets;
 
-import Examination.DatabaseWrappers.DatabaseWorkerQuestions;
+import Examination.repositories.QuestionRepositoryImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +19,13 @@ public class QuestionsServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         try {
-            List<String> quest = new DatabaseWorkerQuestions().ViewQuestions();
+            List<String> quest = new QuestionRepositoryImpl().ViewQuestions();
             for (String question : quest) {
                 writer.println("<p>Вопрос: " + question + "</p>");
             }
         }finally {
             writer.close();
         }
-
     }
 
 }

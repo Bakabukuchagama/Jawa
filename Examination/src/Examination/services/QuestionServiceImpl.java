@@ -1,8 +1,8 @@
-package Examination.Services;
+package Examination.services;
 
-import Examination.Entities.Question;
-import Examination.Enumerations.QuestionDifficulty;
-import Examination.Enumerations.QuestionType;
+import Examination.entities.Question;
+import Examination.enumerations.QuestionDifficulty;
+import Examination.enumerations.QuestionType;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -43,7 +43,7 @@ private static QuestionServiceImpl instance;
 
 
     @Override
-    public void addQuestion(List<Question> questionList) throws TransformerException, ParserConfigurationException {
+    public void addQuestionToList(List<Question> questionList) throws TransformerException, ParserConfigurationException {
         Question newQuest = new Question();
         List<String> answer = new ArrayList<>();
         System.out.println("Введите вопрос: ");
@@ -54,7 +54,7 @@ private static QuestionServiceImpl instance;
         newQuest.setDifficulty(QuestionDifficulty.getByName(scanner.nextLine()));
         System.out.println("Введите тип вопроса (ONE_QUESTION, MANY_QUESTION, OPEN_QUESTION): ");
         newQuest.setType(QuestionType.getByName(scanner.nextLine()));
-        if (newQuest.getType().equals("MANY_QUESTION")){
+        if (newQuest.getType().name().equals("MANY_QUESTION")){
             System.out.println("Введите количество ответов и следом сами ответы: ");
             for (int i = 0; i < scanner.nextInt(); i++) {
                 answer.add(scanner.nextLine());
@@ -117,7 +117,7 @@ private static QuestionServiceImpl instance;
 
                 String input = getInput("Введите новый вопрос: ", scanner);
                 editQuest.setQuestion(input.equals("") ? editQuest.getQuestion() : input);
-                if(editQuest.getType().equals("MANY_QUESTION")){
+                if(editQuest.getType().name().equals("MANY_QUESTION")){
                     System.out.println("Введите новое количество ответов и следом сами ответы: ");
                         for (int i = 0; i < scanner.nextInt(); i++) {
                         answer.add(scanner.nextLine());

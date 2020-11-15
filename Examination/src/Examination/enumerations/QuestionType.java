@@ -1,4 +1,4 @@
-package Examination.Enumerations;
+package Examination.enumerations;
 
 public enum QuestionType {
     ONE_QUESTION("ONE_QUESTION"),

@@ -1,6 +1,6 @@
-package Examination.Services;
+package Examination.services;
 
-import Examination.Entities.Question;
+import Examination.entities.Question;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuestionService {
 
-    void addQuestion(List<Question> questionList) throws TransformerException, ParserConfigurationException;
+    void addQuestionToList(List<Question> questionList) throws TransformerException, ParserConfigurationException;
 
     void viewQuestion(List<Question> questionList);
 

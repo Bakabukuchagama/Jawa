@@ -1,15 +1,9 @@
 package Examination;
 
-import Examination.Entities.Question;
-import Examination.Services.QuestInitialization;
-import Examination.Services.QuestionServiceImpl;
-import Examination.Services.UserServiceImpl;
-import com.thoughtworks.qdox.model.expression.Equals;
-import org.xml.sax.SAXException;
+import Examination.entities.Question;
+import Examination.services.QuestInitialization;
+import Examination.services.QuestionServiceImpl;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,7 +41,7 @@ public class RealizeFunctionalle {
                 QuestionServiceImpl.getInstance().viewQuestion(questionList);
             }
             if(command.contains(ADD)){
-                new QuestionServiceImpl().addQuestion(questionList);
+                new QuestionServiceImpl().addQuestionToList(questionList);
             }
             if(command.contains(LOOK)){
                 new QuestionServiceImpl().viewOneQuestion(questionList, command);

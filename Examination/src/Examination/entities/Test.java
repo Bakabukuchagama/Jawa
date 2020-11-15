@@ -1,4 +1,4 @@
-package Examination.Entities;
+package Examination.entities;
 
 public class Test {
     private Question[] questions;

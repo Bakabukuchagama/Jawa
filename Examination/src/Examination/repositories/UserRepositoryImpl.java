@@ -1,58 +1,48 @@
-package Examination.DatabaseWrappers;
+package Examination.repositories;
 
-import Examination.People.User;
-import org.apache.commons.lang3.ObjectUtils;
+import Examination.enumerations.UserRoleEnum;
+import Examination.people.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.Scanner;
 
-public class DatabaseWorkerUsers {
-    private Connection connection = null;
-    private PreparedStatement statement = null;
-    private ResultSet result = null;
+@Component
+public class UserRepositoryImpl {
+    @Autowired
+    DatabaseWorker database;
     Scanner scanner = new Scanner(System.in);
-
-    private String getInput(String text, Scanner scanner){
-        System.out.println(text);
-        String scan = scanner.nextLine();
-        return scan;
-    }
-
-    public DatabaseWorkerUsers(){
-        try {
-            DriverManager.registerDriver(new org.h2.Driver());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
     public void Registration(User user){
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-            statement = connection.prepareStatement("insert into USERS (LOGIN,PASSWORD,NAME) values(?, ?, ?)");
+            connection = database.getConnection();
+            statement = connection.prepareStatement("insert into USERS (LOGIN,PASSWORD,NAME,ADMIN) values(?, ?, ?, ?)");
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getName());
+            if (user.getRole().equals(UserRoleEnum.ADMIN)){
+                statement.setBoolean(4, Boolean.TRUE);
+            }else {
+                statement.setBoolean(4, Boolean.FALSE);
+            }
             int result = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
+           database.close(connection, statement);
         }
 
     }
 
     public String authorization(){
         String role = "";
+        Connection  connection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            connection = database.getConnection();
             Boolean log = false;
             while (!log) {
                 statement = connection.prepareStatement("SELECT LOGIN, PASSWORD, ADMIN from USERS where login=? and password=? ");
@@ -77,20 +67,15 @@ public class DatabaseWorkerUsers {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (result != null) result.close();
-            } catch (Exception e) {
-            };
+           database.close(connection, statement, result);
         }
 
         return role;
+    }
+
+    private String getInput(String text, Scanner scanner){
+        System.out.println(text);
+        String scan = scanner.nextLine();
+        return scan;
     }
 }

@@ -1,7 +1,7 @@
-package Examination.Entities;
+package Examination.entities;
 
-import Examination.Enumerations.QuestionDifficulty;
-import Examination.Enumerations.QuestionType;
+import Examination.enumerations.QuestionDifficulty;
+import Examination.enumerations.QuestionType;
 
 import java.util.List;
 

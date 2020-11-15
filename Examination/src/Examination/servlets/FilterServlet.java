@@ -1,4 +1,4 @@
-package Examination.Servlets;
+package Examination.servlets;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

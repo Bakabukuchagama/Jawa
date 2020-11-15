@@ -1,4 +1,4 @@
-package Examination.Enumerations;
+package Examination.enumerations;
 
 public enum QuestionDifficulty {
     EASY("EASY"),

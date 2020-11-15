@@ -1,31 +1,28 @@
-package Examination.DatabaseWrappers;
-import Examination.Entities.Question;
-import Examination.Enumerations.QuestionDifficulty;
-import Examination.Enumerations.QuestionType;
+package Examination.repositories;
+import Examination.entities.Question;
+import Examination.enumerations.QuestionDifficulty;
+import Examination.enumerations.QuestionType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-public class DatabaseWorkerQuestions {
-    private Connection connection = null;
-    private PreparedStatement statement = null;
-    private ResultSet result = null;
-    Scanner scanner = new Scanner(System.in);
 
-    public DatabaseWorkerQuestions() {
-        try {
-            DriverManager.registerDriver(new org.h2.Driver());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+
+@Component
+public class QuestionRepositoryImpl {
+    @Autowired
+    DatabaseWorker database;
 
     public List<String> ViewQuestions() {
-        List<String> questions = new ArrayList<String>();
+        List<String> questions = new ArrayList<>();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            connection = database.getConnection();
             statement = connection.prepareStatement("select QUESTION from QUESTIONS");
             result = statement.executeQuery();
 
@@ -36,25 +33,16 @@ public class DatabaseWorkerQuestions {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (result != null) result.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
+            database.close(result, statement, connection);
         }
         return questions;
     }
 
     public void AddQuestion(Question question){
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            connection = database.getConnection();
             statement = connection.prepareStatement("insert into question(QUESTION, AUTHOR, DIFFICULTY, TYPE, ANSWER) values(?, ?, ?, ?, ?)");
             statement.setString(1, question.getQuestion());
             statement.setString(2, question.getAuthor());
@@ -72,41 +60,32 @@ public class DatabaseWorkerQuestions {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
+            database.close(statement, connection);
             }
         }
-    }
 
     public void delQuest(String command) {
+        PreparedStatement statement = null;
+        Connection connection = null;
         try {
-            DriverManager.registerDriver(new org.h2.Driver());
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            connection = database.getConnection();
             statement = connection.prepareStatement("delete from QUESTIONS where ID = ?");
             statement.setString(1, command);
             int result = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
+           database.close(connection, statement);
         }
     }
 
     public Question getQuestion(String id) {
         Question quest= new Question();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
         try {
+            connection = database.getConnection();
             String typeQuestion, author, difficulty, question;
             List<String> answer = new ArrayList<>();
             QuestionType questionType1;
@@ -137,26 +116,16 @@ public class DatabaseWorkerQuestions {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (result != null) result.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
+            database.close(connection, result, statement);
         }
         return quest;
     }
 
     public void updateQuest(String id, String param, String newValue) {
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            DriverManager.registerDriver(new org.h2.Driver());
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            connection= database.getConnection();
             statement = connection.prepareStatement("update QUESTIONS set ? = ? where ID = ?");
             statement.setString(1, param);
             statement.setString(2, newValue);
@@ -165,14 +134,7 @@ public class DatabaseWorkerQuestions {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (statement != null) statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                if (connection != null) connection.close();
-            } catch (Exception e) {
-            }
+            database.close(connection, statement);
         }
     }
 }

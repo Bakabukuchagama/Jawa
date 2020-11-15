@@ -1,4 +1,4 @@
-package Examination.Entities;
+package Examination.entities;
 
 public class Testing {
     private Test test;

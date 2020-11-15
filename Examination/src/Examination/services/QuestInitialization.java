@@ -1,8 +1,8 @@
-package Examination.Services;
+package Examination.services;
 
-import Examination.Entities.Question;
-import Examination.Enumerations.QuestionDifficulty;
-import Examination.Enumerations.QuestionType;
+import Examination.entities.Question;
+import Examination.enumerations.QuestionDifficulty;
+import Examination.enumerations.QuestionType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

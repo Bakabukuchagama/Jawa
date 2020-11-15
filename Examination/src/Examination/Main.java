@@ -1,14 +1,8 @@
 package Examination;
 
-import Examination.Entities.Question;
-import Examination.Services.QuestInitialization;
-import Examination.Services.QuestionServiceImpl;
-import Examination.Services.UserServiceImpl;
-import com.thoughtworks.qdox.model.expression.Equals;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import java.util.Scanner;
 
 @SpringBootApplication
 @ServletComponentScan

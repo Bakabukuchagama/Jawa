@@ -1,7 +1,6 @@
-package Examination.Services;
+package Examination.services;
 
-import Examination.Entities.Question;
-import Examination.Main;
+import Examination.entities.Question;
 import Examination.RealizeFunctionalle;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -57,7 +56,7 @@ public class XMLWriter {
             employee.appendChild(Type);
 
             Element Answer = document.createElement("answer");
-            Answer.appendChild(document.createTextNode(quest.getAnswer()));
+           // Answer.appendChild(document.createTextNode(quest.getAnswer()));
             employee.appendChild(Answer);
         }
 

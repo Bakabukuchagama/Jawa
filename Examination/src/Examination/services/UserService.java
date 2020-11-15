@@ -1,4 +1,4 @@
-package Examination.Services;
+package Examination.services;
 
 public interface UserService {
 
